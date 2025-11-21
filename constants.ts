@@ -1,3 +1,5 @@
+import { RpmData } from './types';
+
 export const TEACHER_DATA: Record<string, string> = {
   "Dra. Sri Mularsih": "196706201994122001", "Drs. Fiva Widiarto": "196510231996011002", "Wahyu Budi Susapti, S.Pd, MM.": "197207291997022002",
   "Marwoto, S.Pd, S.Kom": "196904082000121001", "Sri Endah Swarastuti, S.Pd": "197407022003122004", "Dra. Cukat Budi Rahayu": "196901121994032010",
@@ -49,7 +51,12 @@ export const PROMPT_TEMPLATES: Record<string, string> = {
     'lampiran_materi': `Anda adalah seorang Guru {MATA_PELAJARAN} kelas {KELAS} fase {FASE}. Buatkan materi ajar lengkap dengan topik {TOPIK} dan mengacu pada tujuan pembelajaran {TUJUAN_PEMBELAJARAN}. Materi ajar harus mendukung pengembangan dimensi profil lulusan yang relevan. Materi ajar harus ditulis secara utuh, mencakup: Judul dan Tujuan Pembelajaran di bagian awal. Pendahuluan atau Apersepsi: paragraf pembuka yang menghubungkan materi dengan kehidupan nyata siswa atau pengetahuan sebelumnya. Isi Materi: jelaskan secara sistematis konsep utama, fakta, prosedur, atau prinsip yang perlu dipahami siswa. Sertakan contoh konkret, ilustrasi, atau analogi. Tugas Ringan atau Pemantik Diskusi: berikan 2–3 pertanyaan atau tugas singkat untuk menguji pemahaman awal. Penutup dan Refleksi Singkat: rangkuman poin penting dan ajakan untuk berpikir kritis atau melanjutkan eksplorasi. Gunakan gaya bahasa yang komunikatif, sesuai dengan jenjang usia peserta didik, serta dukung pembelajaran aktif, kontekstual, dan menyenangkan. Materi ajar harus bisa digunakan langsung oleh guru untuk kegiatan belajar di kelas maupun pembelajaran mandiri. Sajikan dalam format teks biasa tanpa Markdown.`
 };
 
-export const SECTIONS_TO_GENERATE: { promptKey: string; target: any; title: string }[] = [
+// Define string keys explicitly to help TS inference in App.tsx
+type StringKeys<T> = {
+  [K in keyof T]: T[K] extends string ? K : never
+}[keyof T];
+
+export const SECTIONS_TO_GENERATE: { promptKey: string; target: StringKeys<RpmData>; title: string }[] = [
     { promptKey: 'identifikasi_murid', target: 'identifikasiPeserta', title: 'Identifikasi Murid' },
     { promptKey: 'identifikasi_materi', target: 'identifikasiMateri', title: 'Identifikasi Materi' },
     { promptKey: 'lintas_disiplin', target: 'desainLintasDisiplin', title: 'Lintas Disiplin' },
@@ -71,7 +78,7 @@ export const SECTIONS_TO_GENERATE: { promptKey: string; target: any; title: stri
     { promptKey: 'lampiran_materi', target: 'lampiranMateri', title: 'Lampiran Materi Ajar' },
 ];
 
-export const INITIAL_RPM_DATA = {
+export const INITIAL_RPM_DATA: RpmData = {
   satuanPendidikan: 'SMK Negeri 1 Purbalingga',
   namaGuru: '',
   nipGuru: '',

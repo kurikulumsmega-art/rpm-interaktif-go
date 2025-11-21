@@ -3,7 +3,7 @@ import { Sparkles } from 'lucide-react';
 import { Header, Footer, SectionCard } from './components/Layout';
 import { Input, TextArea, Modal, Button, LoadingOverlay, Toast } from './components/UI';
 import { SignatureSection } from './components/SignatureSection';
-import { RpmData, GenerationContext, SectionConfig } from './types';
+import { RpmData, GenerationContext } from './types';
 import { INITIAL_RPM_DATA, TEACHER_DATA, SECTIONS_TO_GENERATE } from './constants';
 import { generateAiContent } from './services/geminiService';
 
@@ -193,7 +193,11 @@ function App() {
 
     results.forEach((res) => {
       if (res.status === 'fulfilled' && res.value.success) {
-        newData[res.value.field as keyof RpmData] = res.value.value;
+        // Type casting is now safer because SECTIONS_TO_GENERATE target is typed as StringKeys<RpmData>
+        // which excludes non-string fields like dimensiProfil
+        const fieldName = res.value.field as keyof RpmData;
+        // We can safely assign because we know these fields are strings in the data object based on our new type definition
+        (newData as any)[fieldName] = res.value.value;
         successCount++;
       } else {
         failCount++;
