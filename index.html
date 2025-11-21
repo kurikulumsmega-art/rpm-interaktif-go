@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPM Interaktif - Penyusun Rencana Pembelajaran Mendalam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body { font-size: 9pt; line-height: 1.2; background-color: white; }
+            .no-print { display: none !important; }
+            main { 
+                padding: 0 !important; 
+                margin: 0 auto !important;
+                max-width: 100%;
+                width: 100%;
+            }
+            .section-card, .rpm-section { 
+                box-shadow: none !important; 
+                border: 1px solid #cccccc !important; 
+                page-break-inside: avoid;
+                margin-bottom: 1rem !important;
+            }
+            .rpm-category { 
+                background-color: #1e3a8a !important; 
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important; 
+            }
+            .rpm-category h3 { color: #ffffff !important; }
+            input, textarea {
+                border: none !important;
+                background: transparent !important;
+                padding: 0 !important;
+                resize: none !important;
+            }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
+  }
+}
+</script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
